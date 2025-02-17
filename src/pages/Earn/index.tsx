@@ -76,23 +76,25 @@ export default function Earn() {
               <AutoColumn gap="md">
                 <RowBetween>
                   <ThemedText.DeprecatedWhite fontWeight={600}>
-                    <Trans>Powswap liquidity mining</Trans>
+                    <Trans>7evn Liquidity Mining</Trans>
                   </ThemedText.DeprecatedWhite>
                 </RowBetween>
                 <RowBetween>
                   <ThemedText.DeprecatedWhite fontSize={14}>
                     <Trans>
-                      Deposit your Liquidity Provider tokens to receive POW, the POW!Swap protocol governance token.
+                      Deposit your Liquidity Provider tokens to receive 7evn, the 7evn gaming token. For every deposit
+                      there is a 0.1% fee. No fee is taken for withdrawals. POW rewards have ended for the POW!Swap
+                      protocol governance token.
                     </Trans>
                   </ThemedText.DeprecatedWhite>
                 </RowBetween>{' '}
                 <ExternalLink
                   style={{ color: theme.deprecated_white, textDecoration: 'underline' }}
-                  href="https://docs.powswap.io"
+                  href="https://sevndex.com/lp.pdf"
                   target="_blank"
                 >
                   <ThemedText.DeprecatedWhite fontSize={14}>
-                    <Trans>Read more about POW</Trans>
+                    <Trans>Read more about 7evn</Trans>
                   </ThemedText.DeprecatedWhite>
                 </ExternalLink>
               </AutoColumn>
@@ -107,7 +109,7 @@ export default function Earn() {
             <ThemedText.DeprecatedMediumHeader style={{ marginTop: '0.5rem' }}>
               <Trans>Participating pools</Trans>
             </ThemedText.DeprecatedMediumHeader>
-            <Countdown exactEnd={new Date(Date.UTC(2022, 8, 23, 6, 0, 0))} />
+            <Countdown exactEnd={new Date(Date.UTC(2026, 8, 23, 6, 0, 0))} />
           </DataRow>
 
           <PoolSection>

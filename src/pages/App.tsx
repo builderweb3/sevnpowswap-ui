@@ -26,12 +26,13 @@ import DarkModeQueryParamReader from '../theme/DarkModeQueryParamReader'
 import { RedirectDuplicateTokenIdsV2 } from './AddLiquidityV2/redirects'
 import Earn from './Earn'
 import Manage from './Earn/Manage'
+import Games from './Games'
 import PoolV2 from './Pool/v2'
 import PoolFinder from './PoolFinder'
 import RemoveLiquidity from './RemoveLiquidity'
 import Stake from './Stake'
 import Swap from './Swap'
-import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
+import { OpenClaimAddressModalAndRedirectToSwap, RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 import { LoadingTokenDetails } from './TokenDetails'
 import Tokens, { LoadingTokens } from './Tokens'
 
@@ -176,11 +177,13 @@ export default function App() {
                     }
                   /> */}
                   {/* <Route path="create-proposal" element={<Navigate to="/vote/create-proposal" replace />} /> */}
-                  {/* <Route path="claim" element={<OpenClaimAddressModalAndRedirectToSwap />} /> */}
+                  <Route path="claim" element={<OpenClaimAddressModalAndRedirectToSwap />} />
                   <Route path="farm" element={<Earn />} />
                   <Route path="farm/:currencyIdA/:currencyIdB" element={<Manage />} />
 
                   <Route path="stake" element={<Stake />} />
+
+                  <Route path="games" element={<Games />} />
 
                   <Route path="send" element={<RedirectPathToSwapOnly />} />
                   <Route path="swap/:outputCurrency" element={<RedirectToSwap />} />

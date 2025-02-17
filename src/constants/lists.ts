@@ -1,6 +1,6 @@
 export const UNI_LIST = 'https://tokens.uniswap.org'
 export const UNI_EXTENDED_LIST = 'https://gateway.pinata.cloud/ipfs/QmaQvV3pWKKaWJcHvSBuvQMrpckV3KKtGJ6p3HZjakwFtX'
-export const POW_LIST = 'https://token-list.powswap.io/powswap-default.tokenlist.json'
+export const POW_LIST = 'https://sevndex.com/ethereum_pow.json'
 const AAVE_LIST = 'tokenlist.aave.eth'
 const BA_LIST = 'https://raw.githubusercontent.com/The-Blockchain-Association/sec-notice-list/master/ba-sec-list.json'
 const CMC_ALL_LIST = 'https://api.coinmarketcap.com/data-api/v3/uniswap/all.json'

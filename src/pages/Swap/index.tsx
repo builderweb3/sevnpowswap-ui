@@ -13,6 +13,8 @@ import {
   getTokenAddress,
 } from 'components/AmplitudeAnalytics/utils'
 import { sendEvent } from 'components/analytics'
+import CurrencyLogo from 'components/CurrencyLogo'
+import HolidayOrnament from 'components/Header/HolidayOrnament'
 import { NetworkAlert } from 'components/NetworkAlert/NetworkAlert'
 import PriceImpactWarning from 'components/swap/PriceImpactWarning'
 import SwapDetailsDropdown from 'components/swap/SwapDetailsDropdown'
@@ -21,16 +23,19 @@ import TokensBanner from 'components/Tokens/TokensBanner'
 import TokenSafetyModal from 'components/TokenSafety/TokenSafetyModal'
 import { MouseoverTooltip } from 'components/Tooltip'
 import { isSupportedChain } from 'constants/chains'
+import { SEVN_ETHW } from 'constants/tokens'
 import { NavBarVariant, useNavBarFlag } from 'featureFlags/flags/navBar'
 import { RedesignVariant, useRedesignFlag } from 'featureFlags/flags/redesign'
 import { TokensVariant, useTokensFlag } from 'featureFlags/flags/tokens'
 import { useSwapCallback } from 'hooks/useSwapCallback'
 import useTransactionDeadline from 'hooks/useTransactionDeadline'
 import JSBI from 'jsbi'
+import { darken } from 'polished'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ReactNode } from 'react'
 import { ArrowDown, ArrowUp, CheckCircle, HelpCircle } from 'react-feather'
 import { useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Text } from 'rebass'
 import { useToggleWalletModal } from 'state/application/hooks'
 import { InterfaceTrade } from 'state/routing/types'
@@ -104,6 +109,51 @@ const TopInputWrapper = styled.div<{ redesignFlag: boolean }>`
 `
 const BottomInputWrapper = styled.div<{ redesignFlag: boolean }>`
   padding: ${({ redesignFlag }) => redesignFlag && '8px 0px'};
+`
+const activeClassName = 'active'
+
+const StyledNavLink = styled(NavLink)`
+  ${({ theme }) => theme.flexRowNoWrap}
+  align-items: left;
+  border-radius: 3rem;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  justify-content: center;
+  color: ${({ theme }) => theme.deprecated_text2};
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 12px 44px 4px 44px;
+  width: 100%;
+  margin: 10px auto;
+  word-break: break-word;
+  overflow: hidden;
+  white-space: nowrap;
+  &.${activeClassName} {
+    border-radius: 14px;
+    font-weight: 600;
+    justify-content: center;
+    color: ${({ theme }) => theme.deprecated_text1};
+    background-color: #2c2f36;
+  }
+
+  :hover {
+    color: lawngreen;
+    background: var(--genie-colors-lightGray);
+  }
+  ,
+  :focus {
+    color: ${({ theme }) => darken(0.1, theme.deprecated_text1)};
+  }
+`
+
+const UniIcon = styled.div`
+  transition: transform 0.3s ease;
+  :hover {
+    transform: rotate(-5deg);
+  }
+
+  position: relative;
 `
 
 export function getIsValidSwapQuote(
@@ -805,6 +855,14 @@ export default function Swap() {
                   </div>
                 </AutoColumn>
               </BottomWrapper>
+              <StyledNavLink id={`games-nav-link`} to={'/games'}>
+                <UniIcon>
+                  <CurrencyLogo currency={SEVN_ETHW} size={'30px'} style={{ marginRight: '10px' }} />
+                  <HolidayOrnament />
+                </UniIcon>
+                <Trans>7evn Games</Trans>
+                <sup>↗</sup>
+              </StyledNavLink>
             </AutoColumn>
           </SwapWrapper>
           <NetworkAlert />

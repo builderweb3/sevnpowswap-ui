@@ -92,12 +92,12 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: Staki
                 {<FormattedCurrencyAmount currencyAmount={stakingInfo?.earnedAmount} />}
               </ThemedText.DeprecatedBody>
               <ThemedText.DeprecatedBody>
-                <Trans>Unclaimed POW</Trans>
+                <Trans>Unclaimed 7EVN</Trans>
               </ThemedText.DeprecatedBody>
             </AutoColumn>
           )}
           <ThemedText.DeprecatedSubHeader style={{ textAlign: 'center' }}>
-            <Trans>When you withdraw, your POW is claimed and your liquidity is removed from the mining pool.</Trans>
+            <Trans>When you withdraw, your 7EVN is claimed and your liquidity is removed from the mining pool.</Trans>
           </ThemedText.DeprecatedSubHeader>
           <ButtonError disabled={!!error} error={!!error && !!stakingInfo?.stakedAmount} onClick={onWithdraw}>
             {error ?? <Trans>Withdraw & Claim</Trans>}
@@ -111,7 +111,7 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: Staki
               <Trans>Withdrawing {stakingInfo?.stakedAmount?.toSignificant(4)} UNI-V2</Trans>
             </ThemedText.DeprecatedBody>
             <ThemedText.DeprecatedBody fontSize={20}>
-              <Trans>Claiming {stakingInfo?.earnedAmount?.toSignificant(4)} POW</Trans>
+              <Trans>Claiming {stakingInfo?.earnedAmount?.toSignificant(4)} 7EVN</Trans>
             </ThemedText.DeprecatedBody>
           </AutoColumn>
         </LoadingView>
@@ -126,7 +126,7 @@ export default function UnstakingModal({ isOpen, onDismiss, stakingInfo }: Staki
               <Trans>Withdrew UNI-V2!</Trans>
             </ThemedText.DeprecatedBody>
             <ThemedText.DeprecatedBody fontSize={20}>
-              <Trans>Claimed POW!</Trans>
+              <Trans>Claimed 7EVN!</Trans>
             </ThemedText.DeprecatedBody>
           </AutoColumn>
         </SubmittedView>

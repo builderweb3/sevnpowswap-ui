@@ -1,9 +1,12 @@
 import { TransactionResponse } from '@ethersproject/providers'
 import { Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
+import { MERKLE_DISTRIBUTOR_ADDRESS } from 'constants/addresses'
+import { useSingleCallResult } from 'lib/hooks/multicall'
 import { useCallback, useMemo } from 'react'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 
+import { useContract } from '../../hooks/useContract'
 import { addTransaction } from './reducer'
 import { TransactionDetails, TransactionInfo, TransactionType } from './types'
 
@@ -91,6 +94,11 @@ export function useHasPendingApproval(token?: Token, spender?: string): boolean 
   )
 }
 
+function useMerkleDistributorContract() {
+  const abiclaim = `[{"inputs":[],"name":"AlreadyClaimed","type":"error"},{"inputs":[],"name":"NothingToClaim","type":"error"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"OwnableInvalidOwner","type":"error"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"OwnableUnauthorizedAccount","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[],"name":"claimWithMapping","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32[]","name":"_proof","type":"bytes32[]"},{"internalType":"uint256","name":"_amount","type":"uint256"}],"name":"claimWithRoot","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_amount","type":"uint256"},{"internalType":"bytes","name":"_signature","type":"bytes"}],"name":"claimWithSignature","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address[]","name":"_recipients","type":"address[]"},{"internalType":"uint256[]","name":"_amounts","type":"uint256[]"}],"name":"setClaimMapping","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"_claimRoot","type":"bytes32"}],"name":"setClaimRoot","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_signer","type":"address"},{"internalType":"address","name":"_token","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"claimed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"claimMapping","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"claimRoot","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"signer","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}]`
+  return useContract(MERKLE_DISTRIBUTOR_ADDRESS, abiclaim, true)
+}
+
 // watch for submissions to claim
 // return null if not done loading, return undefined if not found
 export function useUserHasSubmittedClaim(account?: string): {
@@ -99,6 +107,9 @@ export function useUserHasSubmittedClaim(account?: string): {
 } {
   const allTransactions = useAllTransactions()
 
+  const timenow = new Date().getTime()
+  const distributorContract = useMerkleDistributorContract()
+  const isClaimedResult = useSingleCallResult(distributorContract, 'claimMapping', [account?.toString()])
   // get the txn if it has been submitted
   const claimTxn = useMemo(() => {
     const txnIndex = Object.keys(allTransactions).find((hash) => {
@@ -107,6 +118,15 @@ export function useUserHasSubmittedClaim(account?: string): {
     })
     return txnIndex && allTransactions[txnIndex] ? allTransactions[txnIndex] : undefined
   }, [account, allTransactions])
-
-  return { claimSubmitted: Boolean(claimTxn), claimTxn }
+  if (claimTxn) {
+    if (
+      Number(claimTxn.confirmedTime?.toString()) + 5000 >= timenow ||
+      Number(isClaimedResult.result?.toString()) === 0
+    ) {
+      return { claimSubmitted: Boolean(claimTxn), claimTxn }
+    } else {
+      return { claimSubmitted: false, claimTxn: undefined }
+    }
+  }
+  return { claimSubmitted: false, claimTxn: undefined }
 }

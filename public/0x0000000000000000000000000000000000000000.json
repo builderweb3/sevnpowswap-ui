@@ -1,0 +1,90 @@
+{
+  "0x1299063c82F77f65814d204F74E850aFa9E00C51": {
+        "index": 0,
+        "amount": "0x2b036da601a044b400000",
+        "proof": [
+            "0x7e94a2bbb6e7b8dafb9a6a6c170f746b033ce5d8af6e3f203a2f7b2fe62830ee",
+            "0x2732fcf10b312934569ef090d866bab168ae10ad5fd8cc21977ee2ef08fe6326",
+            "0xb7babbdd9be51b79b2852ac1bdbe44d7e32c0c63550ff699006a0e3b3cbcbd29",
+            "0x7c3444a698060197cefd81e01aff0327a7111aa86ad1ae7b86f69d4c1d25c803"
+          ],
+        "flags": { "isSOCKS": true, "isLP": true, "isUser": true }
+      },
+  "0x27360752c63564928f114d09a73eeb4e2c597372": {
+    "index": 1,
+    "amount": "0x1b1ae4d6e2ef500000",
+    "proof": [
+        "0x6dd0b9cd39093799cd44cd1c3fe477de4435ead7b849ec9f8e59db98e1e5105c",
+        "0x2732fcf10b312934569ef090d866bab168ae10ad5fd8cc21977ee2ef08fe6326",
+        "0xb7babbdd9be51b79b2852ac1bdbe44d7e32c0c63550ff699006a0e3b3cbcbd29",
+        "0x7c3444a698060197cefd81e01aff0327a7111aa86ad1ae7b86f69d4c1d25c803"
+      ],
+    "flags": { "isSOCKS": true, "isLP": true, "isUser": true }
+  },
+  "0x4Ea3808574387E81B87265fBc34FC0e567Ad5231": {
+    "index": 2,
+    "amount": "0xfe1c215e8f838e000000",
+    "proof": [
+        "0xa62a2c07014d140733e723a5f86c997d2d71bc1309e59e240f85a2f8ee7cb8f4",
+        "0x95664242a4ce02d91013f30448493ac25e4a381d2cd3ce826aaeb39d44af376a",
+        "0xb7babbdd9be51b79b2852ac1bdbe44d7e32c0c63550ff699006a0e3b3cbcbd29",
+        "0x7c3444a698060197cefd81e01aff0327a7111aa86ad1ae7b86f69d4c1d25c803"
+      ],
+    "flags": { "isSOCKS": true, "isLP": true, "isUser": true }
+  },
+  "0x50Eb10dc10eFa39CDB2Dfc41E8296aBA599CBEaF": {
+    "index": 3,
+    "amount": "0x34f086f3b33b68400000",
+    "proof": [
+        "0x9f50164828976b6baa479ea39c718c745bbc0d2521b67dfde8474cbdc9711057",
+        "0x95664242a4ce02d91013f30448493ac25e4a381d2cd3ce826aaeb39d44af376a",
+        "0xb7babbdd9be51b79b2852ac1bdbe44d7e32c0c63550ff699006a0e3b3cbcbd29",
+        "0x7c3444a698060197cefd81e01aff0327a7111aa86ad1ae7b86f69d4c1d25c803"
+      ],
+    "flags": { "isSOCKS": true, "isLP": true, "isUser": true }
+  },
+  "0x7295d27a71b573c3bB49DC8A32547D41Dc49da9B": {
+    "index": 4,
+    "amount": "0x21aecb9f88c1a34a00000",
+    "proof": [
+        "0xaca9e8f52d82c17e25e47dbe40aac3512f891866576e6f482b9eddda1c00806b",
+        "0xd59d4baeaabd4dc064dcc8e7f3fcb2a8b0f5b5f9d9cd10ca0a0da2821c9f5430",
+        "0xe0fa36d573a0b61452bce9cc66dfee7af42850137ed59814503610f7e105f4b2",
+        "0x7c3444a698060197cefd81e01aff0327a7111aa86ad1ae7b86f69d4c1d25c803"
+      ],
+    "flags": { "isSOCKS": true, "isLP": true, "isUser": true }
+  },
+  "0x7725C120cF978499F26c6014d3cFC75CAA2FB370": {
+    "index": 5,
+    "amount": "0x69e10de76676d0800000",
+    "proof": [
+        "0xa9febb952c75e1458a2687201ab2f65eb4f1e7c4708d5f0ef0769517531b0518",
+        "0xd59d4baeaabd4dc064dcc8e7f3fcb2a8b0f5b5f9d9cd10ca0a0da2821c9f5430",
+        "0xe0fa36d573a0b61452bce9cc66dfee7af42850137ed59814503610f7e105f4b2",
+        "0x7c3444a698060197cefd81e01aff0327a7111aa86ad1ae7b86f69d4c1d25c803"
+      ],
+    "flags": { "isSOCKS": true, "isLP": true, "isUser": true }
+  },
+  "0xc2b67082aF78f11E1551cFe65c4E49bf427e1d4a": {
+    "index": 6,
+    "amount": "0x3edda04164d68bcc00000",
+    "proof": [
+        "0xce27d8ad8b249f99fa5c0f52801b28635114e2ecca78f269472a9f1b2a3ab79c",
+        "0xd890ca593525eaeae7ec3eff79ac42f4b3fb26a683862c6293f93e5042afbb15",
+        "0xe0fa36d573a0b61452bce9cc66dfee7af42850137ed59814503610f7e105f4b2",
+        "0x7c3444a698060197cefd81e01aff0327a7111aa86ad1ae7b86f69d4c1d25c803"
+      ],
+    "flags": { "isSOCKS": true, "isLP": true, "isUser": true }
+  },
+  "0xe306235B76f319d18508071a4e3a2cC51222eA0d": {
+    "index": 7,
+    "amount": "0x19f1638a379ae040000",
+    "proof": [
+        "0xb36bcf9cc1d9e7f60b1f757ebd8b4694b17fc592b16065d243c43b09fde00b29",
+        "0xd890ca593525eaeae7ec3eff79ac42f4b3fb26a683862c6293f93e5042afbb15",
+        "0xe0fa36d573a0b61452bce9cc66dfee7af42850137ed59814503610f7e105f4b2",
+        "0x7c3444a698060197cefd81e01aff0327a7111aa86ad1ae7b86f69d4c1d25c803"
+      ],
+    "flags": { "isSOCKS": true, "isLP": true, "isUser": true }
+  }
+}

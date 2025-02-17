@@ -2,6 +2,7 @@ import { Contract } from '@ethersproject/contracts'
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { useContract } from 'hooks/useContract'
+import { useGetGamePrice } from 'hooks/useGetGamePrice'
 import { useTotalSupply } from 'hooks/useTotalSupply'
 import { useCallback } from 'react'
 import { useTokenBalance } from 'state/connection/hooks'
@@ -53,9 +54,17 @@ export function usePowBarContract(withSignerIfPossible?: boolean): Contract | nu
   )
 }
 
+const USDT_SVLP: {
+  [chainId: number]: string
+} = {
+  10001: '0xD276A2C832020837e6221c5cC2de030C7da2c115',
+}
+
 export function usePowBarStats() {
   const totalSPow = useTotalSupply(SPOW_ETHW)
   const totalPowStaked = useTokenBalance(SPOW_ETHW.address, POW_ETHW)
+  const totalSevn = useGetGamePrice()
+  // const price = (Number(tokenBTxn[0].toString()) / Number(tokenBTxn[1].toString() / 0.000000000001)) * 0.04
 
   const powToXPowRatio =
     totalPowStaked != null && totalSPow != null && totalPowStaked.greaterThan(0)
@@ -66,5 +75,7 @@ export function usePowBarStats() {
     totalTriStaked: totalPowStaked,
     totalXTri: totalSPow,
     triToXTRIRatio: powToXPowRatio,
+    gameprice: totalSevn,
+    theprice: totalSevn,
   }
 }

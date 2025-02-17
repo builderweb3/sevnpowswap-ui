@@ -304,10 +304,10 @@ export default function Header() {
           <Trans>Pool</Trans>
         </StyledNavLink>
         <StyledNavLink data-cy="farm-nav-link" id={`farm-nav-link`} to={'/farm'}>
-          <Trans>Farm</Trans>
+          <Trans>⑦ Farm</Trans>
         </StyledNavLink>
-        <StyledNavLink data-cy="stake-nav-link" id={`stkea-nav-link`} to={'/stake'}>
-          <Trans>Stake</Trans>
+        <StyledNavLink id={`games-nav-link`} to={'/games'}>
+          <Trans>⑦ Games</Trans>
         </StyledNavLink>
         <StyledExternalLink id={`charts-nav-link`} href="https://www.geckoterminal.com/ethw/powswap/pools">
           <Trans>Charts</Trans>
@@ -329,7 +329,7 @@ export default function Header() {
                       <Trans>Claiming UNI</Trans>
                     </Dots>
                   ) : (
-                    <Trans>Claim UNI</Trans>
+                    <Trans>Claim ⑦</Trans>
                   )}
                 </ThemedText.DeprecatedWhite>
               </UNIAmount>

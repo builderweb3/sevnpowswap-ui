@@ -7,6 +7,7 @@ import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import ERC20ABI from 'abis/erc20.json'
 import { abi as MASTERCHEF_ABI } from 'abis/MasterChef.json'
+import { abi as MASTERCHEFMOD_ABI } from 'abis/MasterChefMod.json'
 import { Erc20Interface } from 'abis/types/Erc20'
 import { SupportedChainId } from 'constants/chains'
 import useCurrentBlockTimestamp from 'hooks/useCurrentBlockTimestamp'
@@ -30,6 +31,8 @@ import {
   POW_ETHW,
   POW_GOERLI,
   POW_MAINNET,
+  POWT_ETHW,
+  SEVN_ETHW,
   SHIB_ETHW,
   TSUKAW_ETHW,
   UNI,
@@ -44,7 +47,7 @@ export const MASTERCHEF_ADDRESS: {
   [chainId: number]: string
 } = {
   1: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
-  10001: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
+  10001: '0x0B182528547288333Ab9Eb80d6C2e6e5754B4d30',
   5: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
 }
 
@@ -68,33 +71,57 @@ export const POWSWAP_DEPLOYMENTS: {
     pools: [],
   },
   10001: {
-    masterchefAddress: '0xb5B6B46EE6f6c93c41123F8edFD3F9506Fef6bf8',
+    masterchefAddress: '0x0B182528547288333Ab9Eb80d6C2e6e5754B4d30',
     sushiPerBlock: JSBI.BigInt('1000000000000000000000'),
-    powToken: POW_ETHW,
+    powToken: SEVN_ETHW,
     pools: [
       {
-        lpTokenAddress: '0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE',
-        token0: SHIB_ETHW,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
-        active: false,
-      },
-      {
-        lpTokenAddress: '0x0566690aB4A57F03b2716D55d83F88f5fe49C7F6',
-        token0: SHIB_ETHW,
+        lpTokenAddress: '0xDB0e437e39681449fDd8a72a0c7F67550A77cc00',
+        token0: SEVN_ETHW,
         token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
         active: true,
       },
       {
-        lpTokenAddress: '0xbC8FcFa04dDdaC6421229E08B24555a5bD9Ba8DF',
+        lpTokenAddress: '0xe45a90a64f3e69e743b763cc770862805117b8f0',
+        token0: SEVN_ETHW,
+        token1: HEX_ETHW,
+        active: true,
+      },
+      {
+        lpTokenAddress: '0xD06BEb32fB43f54A2EF1E40592A3B6e9b4Cd7d0a',
+        token0: SEVN_ETHW,
+        token1: POW_ETHW,
+        active: true,
+      },
+      {
+        lpTokenAddress: '0xd276a2c832020837e6221c5cc2de030c7da2c115',
+        token0: SEVN_ETHW,
+        token1: CBUSDT_ETHW,
+        active: true,
+      },
+      {
+        lpTokenAddress: '0x09Cd74252f1238C7B9B34576Ca20081FD2947B1c',
+        token0: POWT_ETHW,
+        token1: HEX_ETHW,
+        active: true,
+      },
+      {
+        lpTokenAddress: '0xD06BEb32fB43f54A2EF1E40592A3B6e9b4Cd7d0a',
         token0: POW_ETHW,
-        token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
+        token1: HEX_ETHW,
+        active: false,
+      },
+      {
+        lpTokenAddress: '0x8b8f6479ab1Fb025C46DB0406FeDb6ce6c448Adb',
+        token0: SEVN_ETHW,
+        token1: POWT_ETHW,
         active: true,
       },
       {
         lpTokenAddress: '0x22708eCe66f074883B6A61ED0d1951Db69bF45c9',
         token0: HEX_ETHW,
         token1: WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token,
-        active: true,
+        active: false,
       },
       {
         lpTokenAddress: '0x58f2e65E97D551944A6d18588A32824E09a7B9ce',
@@ -169,12 +196,13 @@ export const POWSWAP_DEPLOYMENTS: {
 
 const STAKING_REWARDS_INTERFACE = new Interface(STAKING_REWARDS_ABI)
 const MASTERCHEF_INTERFACE = new Interface(MASTERCHEF_ABI)
+const MASTERCHEFMOD_INTERFACE = new Interface(MASTERCHEFMOD_ABI)
 const AVERAGE_BLOCKTIME = 13.5
 const ERC20Interface = new Interface(ERC20ABI) as Erc20Interface
 
 export const STAKING_GENESIS = 1600387200
 
-export const REWARDS_DURATION_DAYS = 60
+export const REWARDS_DURATION_DAYS = 4000
 
 export const STAKING_REWARDS_INFO: {
   [chainId: number]: {
@@ -198,6 +226,12 @@ export const STAKING_REWARDS_INFO: {
     {
       tokens: [WRAPPED_NATIVE_CURRENCY[SupportedChainId.MAINNET] as Token, WBTC],
       stakingRewardAddress: '0xCA35e32e7926b96A9988f61d510E038108d8068e',
+    },
+  ],
+  10001: [
+    {
+      tokens: [WRAPPED_NATIVE_CURRENCY[SupportedChainId.ETHW] as Token, SEVN_ETHW],
+      stakingRewardAddress: '0x070d817D43c6C1C9A5aB814F845Bc766Aa1A085c',
     },
   ],
 }
@@ -239,15 +273,20 @@ export function useStakingInfoV2(pairToFilterBy?: Pair | null): StakingInfo[] {
   const MASTERCHEF_CONTRACT =
     chainId && MASTERCHEF_ADDRESS[chainId] ? new Contract(MASTERCHEF_ADDRESS[chainId], MASTERCHEF_INTERFACE) : undefined
 
+  const MASTERCHEFMOD_CONTRACT =
+    chainId && MASTERCHEF_ADDRESS[chainId]
+      ? new Contract(MASTERCHEF_ADDRESS[chainId], MASTERCHEFMOD_INTERFACE)
+      : undefined
+
   const pools = chainId && POWSWAP_DEPLOYMENTS[chainId] ? POWSWAP_DEPLOYMENTS[chainId].pools : []
 
   const powToken = chainId && POWSWAP_DEPLOYMENTS[chainId] ? POWSWAP_DEPLOYMENTS[chainId].powToken : null
 
   const poolInfoArgs = Array.from(Array(pools.length).keys()).map((value) => [value])
-  const poolInfos = useSingleContractMultipleData(MASTERCHEF_CONTRACT, 'poolInfo', poolInfoArgs)
+  const poolInfos = useSingleContractMultipleData(MASTERCHEFMOD_CONTRACT, 'poolInfo', poolInfoArgs)
 
   const userInfoArgs = Array.from(Array(pools.length).keys()).map((value) => [value, account])
-  const userInfos = useSingleContractMultipleData(MASTERCHEF_CONTRACT, 'userInfo', userInfoArgs)
+  const userInfos = useSingleContractMultipleData(MASTERCHEFMOD_CONTRACT, 'userInfo', userInfoArgs)
 
   const poolBalances = useMultipleContractSingleData(
     pools.map((pool) => pool.lpTokenAddress),
@@ -256,9 +295,9 @@ export function useStakingInfoV2(pairToFilterBy?: Pair | null): StakingInfo[] {
     [MASTERCHEF_CONTRACT?.address]
   )
 
-  const pendingPow = useSingleContractMultipleData(MASTERCHEF_CONTRACT, 'pendingSushi', userInfoArgs)
+  const pendingPow = useSingleContractMultipleData(MASTERCHEFMOD_CONTRACT, 'pendingTokens', userInfoArgs)
 
-  const totalAllocPoint = useSingleCallResult(MASTERCHEF_CONTRACT, 'totalAllocPoint')
+  const totalAllocPoint = useSingleCallResult(MASTERCHEFMOD_CONTRACT, 'totalAllocPoint')
 
   const stakingInfo: StakingInfo[] = []
   if (pools.length === 0) return []

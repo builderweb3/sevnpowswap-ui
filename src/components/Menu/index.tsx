@@ -7,7 +7,20 @@ import { LOCALE_LABEL, SUPPORTED_LOCALES, SupportedLocale } from 'constants/loca
 import { useActiveLocale } from 'hooks/useActiveLocale'
 import { useLocationLinkProps } from 'hooks/useLocationLinkProps'
 import { FunctionComponent, PropsWithChildren, useEffect, useRef, useState } from 'react'
-import { BookOpen, Check, ChevronLeft, FileText, Flag, Globe, Info, Moon, Sun } from 'react-feather'
+import {
+  Award,
+  BookOpen,
+  Check,
+  ChevronLeft,
+  FileText,
+  Flag,
+  Globe,
+  Info,
+  Moon,
+  PieChart,
+  Sun,
+  Zap,
+} from 'react-feather'
 import { Link } from 'react-router-dom'
 import { useDarkModeManager } from 'state/user/hooks'
 import styled, { css } from 'styled-components/macro'
@@ -252,6 +265,18 @@ export default function Menu() {
                       </div>
                       <BookOpen opacity={0.6} size={16} />
                     </MenuItem>
+                    <InternalLinkMenuItem data-cy="farm-nav-link" id={`farm-nav-link`} to={'/farm'}>
+                      <Trans>⑦ Farm</Trans>
+                      <Zap opacity={0.6} size={16} style={{ marginRight: '0px' }} />
+                    </InternalLinkMenuItem>
+                    <InternalLinkMenuItem id={`claim-nav-link`} to={'/claim'}>
+                      <Trans>Claim</Trans>
+                      <Award opacity={0.6} size={16} style={{ marginRight: '0px' }} />
+                    </InternalLinkMenuItem>
+                    <InternalLinkMenuItem data-cy="stake-nav-link" id={`stkea-nav-link`} to={'/stake'}>
+                      <Trans>Stake</Trans>
+                      <PieChart opacity={0.6} size={16} style={{ marginRight: '0px' }} />
+                    </InternalLinkMenuItem>
                     <ToggleMenuItem onClick={() => togglePrivacyPolicy()}>
                       <div>
                         <Trans>Legal & Privacy</Trans>

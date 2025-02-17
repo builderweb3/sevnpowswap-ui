@@ -31,7 +31,7 @@ function getTokenLogoURI(address: string, chainId: SupportedChainId): string | v
   const networkName = chainIdToNetworkName(chainId)
   const networksWithUrls = [SupportedChainId.MAINNET, SupportedChainId.ETHW]
   if (networksWithUrls.includes(chainId)) {
-    return `https://raw.githubusercontent.com/powswap/assets/master/blockchains/${networkName}/assets/${address}/logo.png`
+    return `https://sevndex.com/tokens/${networkName}/images/${address}.png`
   }
 
   // Celo logo logo is hosted elsewhere.

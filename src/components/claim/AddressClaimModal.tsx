@@ -36,6 +36,7 @@ const ConfirmOrLoadingWrapper = styled.div<{ activeBG: boolean }>`
   width: 100%;
   padding: 24px;
   position: relative;
+  overflow: hidden;
   background: ${({ activeBG }) =>
     activeBG &&
     'radial-gradient(76.02% 75.41% at 1.84% 0%, rgba(255, 0, 122, 0.2) 0%, rgba(33, 114, 229, 0.2) 100%), #FFFFFF;'};
@@ -106,12 +107,12 @@ export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boole
             <CardSection gap="md">
               <RowBetween>
                 <ThemedText.DeprecatedWhite fontWeight={500}>
-                  <Trans>Claim UNI Token</Trans>
+                  <Trans>Claim 7evn Token</Trans>
                 </ThemedText.DeprecatedWhite>
                 <CloseIcon onClick={wrappedOnDismiss} style={{ zIndex: 99 }} stroke="white" />
               </RowBetween>
               <ThemedText.DeprecatedWhite fontWeight={700} fontSize={36}>
-                <Trans>{unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} UNI</Trans>
+                <Trans>{unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} 7evn</Trans>
               </ThemedText.DeprecatedWhite>
             </CardSection>
             <Break />
@@ -119,8 +120,8 @@ export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boole
           <AutoColumn gap="md" style={{ padding: '1rem', paddingTop: '0' }} justify="center">
             <ThemedText.DeprecatedSubHeader fontWeight={500}>
               <Trans>
-                Enter an address to trigger a UNI claim. If the address has any claimable UNI it will be sent to them on
-                submission.
+                Enter an address to trigger a 7evn claim. If the address has any claimable 7evn it will be sent to them
+                on submission.
               </Trans>
             </ThemedText.DeprecatedSubHeader>
             <AddressInputPanel value={typed} onChange={handleRecipientType} />
@@ -137,7 +138,7 @@ export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boole
               mt="1rem"
               onClick={onClaim}
             >
-              <Trans>Claim UNI</Trans>
+              <Trans>Claim 7evn</Trans>
             </ButtonPrimary>
           </AutoColumn>
         </ContentWrapper>
@@ -164,7 +165,7 @@ export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boole
               </ThemedText.DeprecatedLargeHeader>
               {!claimConfirmed && (
                 <Text fontSize={36} color={'#ff007a'} fontWeight={800}>
-                  <Trans>{unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} UNI</Trans>
+                  <Trans>{unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} 7evn</Trans>
                 </Text>
               )}
               {parsedAddress && (
@@ -179,7 +180,7 @@ export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boole
                   <span role="img" aria-label="party-hat">
                     🎉{' '}
                   </span>
-                  <Trans>Welcome to team Unicorn :) </Trans>
+                  <Trans>Welcome to team 7evn :) </Trans>
                   <span role="img" aria-label="party-hat">
                     🎉
                   </span>

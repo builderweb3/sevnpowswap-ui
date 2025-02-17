@@ -3,8 +3,10 @@ import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { NavBarVariant, useNavBarFlag } from 'featureFlags/flags/navBar'
 import JSBI from 'jsbi'
+import { darken } from 'polished'
 import { useCallback, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { CountUp } from 'use-count-up'
 
@@ -97,6 +99,37 @@ const DataRow = styled(RowBetween)`
   `};
 `
 
+const activeClassName = 'active'
+
+const StyledNavLink = styled(NavLink)`
+  ${({ theme }) => theme.flexRowNoWrap}
+  align-items: left;
+  border-radius: 3rem;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: ${({ theme }) => theme.deprecated_text2};
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0px 0px;
+  margin: auto;
+  word-break: break-word;
+  overflow: hidden;
+  white-space: nowrap;
+  &.${activeClassName} {
+    border-radius: 14px;
+    font-weight: 300;
+    justify-content: left;
+    color: ${({ theme }) => theme.deprecated_text1};
+    background-color: transparent;
+  }
+
+  :hover,
+  :focus {
+    color: ${({ theme }) => darken(0.1, theme.deprecated_text1)};
+  }
+`
+
 export default function Manage() {
   const navBarFlag = useNavBarFlag()
   const navBarFlagEnabled = navBarFlag === NavBarVariant.Enabled
@@ -164,7 +197,17 @@ export default function Manage() {
 
   return (
     <PageWrapper gap="lg" justify="center" navBarFlag={navBarFlagEnabled}>
-      <RowBetween style={{ gap: '24px' }}>
+      <RowBetween style={{ gap: '5px' }}>
+        <ThemedText.DeprecatedMediumHeader style={{ margin: 0 }}>
+          <Trans>
+            <StyledNavLink data-cy="farm-nav-link" id={`farm-nav-link`} to={'/farm'}>
+              <sup>&#60;&#160;</sup>
+              Back
+            </StyledNavLink>
+          </Trans>
+        </ThemedText.DeprecatedMediumHeader>
+      </RowBetween>
+      <RowBetween style={{ gap: '5px' }}>
         <ThemedText.DeprecatedMediumHeader style={{ margin: 0 }}>
           <Trans>
             {currencyA?.symbol}-{currencyB?.symbol} Liquidity Mining
@@ -181,7 +224,7 @@ export default function Manage() {
             </ThemedText.DeprecatedBody>
             <ThemedText.DeprecatedBody fontSize={24} fontWeight={500}>
               {valueOfTotalStakedAmountInUSDC
-                ? `$${valueOfTotalStakedAmountInUSDC.toFixed(0, { groupSeparator: ',' })}`
+                ? `${valueOfTotalStakedAmountInUSDC.toFixed(0, { groupSeparator: ',' })}`
                 : `${valueOfTotalStakedAmountInWETH?.toSignificant(4, { groupSeparator: ',' }) ?? '-'} ${
                     currencyB?.symbol
                   }`}
@@ -197,10 +240,10 @@ export default function Manage() {
               {stakingInfo?.active ? (
                 <Trans>
                   {stakingInfo.totalRewardRate?.multiply(BIG_INT_SECONDS_IN_WEEK)?.toFixed(0, { groupSeparator: ',' })}{' '}
-                  POW / week
+                  7evn / week
                 </Trans>
               ) : (
-                <Trans>0 POW / week</Trans>
+                <Trans>0 7evn / week</Trans>
               )}
             </ThemedText.DeprecatedBody>
           </AutoColumn>
@@ -297,7 +340,7 @@ export default function Manage() {
               <RowBetween>
                 <div>
                   <ThemedText.DeprecatedBlack>
-                    <Trans>Your unclaimed POW</Trans>
+                    <Trans>Your unclaimed 7evn</Trans>
                   </ThemedText.DeprecatedBlack>
                 </div>
               </RowBetween>
@@ -321,10 +364,10 @@ export default function Manage() {
                   {stakingInfo?.active ? (
                     <Trans>
                       {stakingInfo.rewardRate?.multiply(BIG_INT_SECONDS_IN_WEEK)?.toFixed(0, { groupSeparator: ',' })}{' '}
-                      POW / week
+                      7evn / week
                     </Trans>
                   ) : (
-                    <Trans>0 POW / week</Trans>
+                    <Trans>0 7evn / week</Trans>
                   )}
                 </ThemedText.DeprecatedBlack>
               </RowBetween>
@@ -335,7 +378,7 @@ export default function Manage() {
           <span role="img" aria-label="wizard-icon" style={{ marginRight: '8px' }}>
             ⭐️
           </span>
-          <Trans>When you withdraw, the contract will automagically claim POW on your behalf!</Trans>
+          <Trans>When you withdraw, the contract will automagically claim 7evn on your behalf!</Trans>
         </ThemedText.DeprecatedMain>
 
         {!showAddLiquidityButton && (
@@ -359,6 +402,18 @@ export default function Manage() {
                   onClick={() => setShowUnstakingModal(true)}
                 >
                   <Trans>Withdraw</Trans>
+                </ButtonPrimary>
+              </>
+            )}
+            {stakingInfo?.earnedAmount?.greaterThan(JSBI.BigInt(0)) && (
+              <>
+                <ButtonPrimary
+                  padding="8px"
+                  $borderRadius="8px"
+                  width="160px"
+                  onClick={() => setShowClaimRewardModal(true)}
+                >
+                  <Trans>Claim</Trans>
                 </ButtonPrimary>
               </>
             )}

@@ -58,6 +58,7 @@ export const TIMELOCK_ADDRESS: AddressMap = constructSameAddressMap('0x1a9C8182C
 
 export const MERKLE_DISTRIBUTOR_ADDRESS: AddressMap = {
   [SupportedChainId.MAINNET]: '0x090D4613473dEE047c3f2706764f49E0821D256e',
+  [SupportedChainId.ETHW]: '0xd4Cd96d33D0AAaa3E812d7B202b43d451204E147',
 }
 
 export const ARGENT_WALLET_DETECTOR_ADDRESS: AddressMap = {

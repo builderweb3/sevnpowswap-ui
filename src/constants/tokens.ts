@@ -28,12 +28,28 @@ export const POW_ETHW = new Token(
   'Powswap'
 )
 
+export const POWT_ETHW = new Token(
+  SupportedChainId.ETHW,
+  '0x4fAC18573F4f01c30555d390D70280AEbCa05ec3',
+  18,
+  'POW',
+  'POW Token'
+)
+
 export const SPOW_ETHW = new Token(
   SupportedChainId.ETHW,
   '0x5Bb2de70EeE1aD7206927bA72281351F141bA594',
   18,
   'sPOW',
   'Staked POW'
+)
+
+export const SEVN_ETHW = new Token(
+  SupportedChainId.ETHW,
+  '0x070d817d43c6c1c9a5ab814f845bc766aa1a085c',
+  18,
+  '7evn',
+  'Seven'
 )
 
 export const SHIB_ETHW = new Token(
@@ -56,7 +72,7 @@ export const HDRN_ETHW = new Token(
 
 export const CBUSDT_ETHW = new Token(
   SupportedChainId.ETHW,
-  '0x2ad7868ca212135c6119fd7ad1ce51cfc5702892',
+  '0x2AD7868CA212135C6119FD7AD1Ce51CFc5702892',
   6,
   'cbUSDT',
   'Chainge Bridged USDT'

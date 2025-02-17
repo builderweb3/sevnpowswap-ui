@@ -8,7 +8,7 @@ import { Text } from 'rebass'
 import styled from 'styled-components/macro'
 
 import Circle from '../../assets/images/blue-loader.svg'
-import tokenLogo from '../../assets/images/token-logo.png'
+import tokenLogo from '../../assets/images/token-logo-sevn.png'
 import { useModalIsOpen, useToggleSelfClaimModal } from '../../state/application/hooks'
 import { ApplicationModal } from '../../state/application/reducer'
 import { useClaimCallback, useUserClaimData, useUserUnclaimedAmount } from '../../state/claim/hooks'
@@ -29,12 +29,14 @@ const ContentWrapper = styled(AutoColumn)`
 const ModalUpper = styled(DataCard)`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   background: radial-gradient(76.02% 75.41% at 1.84% 0%, #ff007a 0%, #021d43 100%);
+  overflow: hidden;
 `
 
 const ConfirmOrLoadingWrapper = styled.div<{ activeBG: boolean }>`
   width: 100%;
   padding: 24px;
   position: relative;
+  overflow: hidden;
   background: ${({ activeBG }) =>
     activeBG &&
     'radial-gradient(76.02% 75.41% at 1.84% 0%, rgba(255, 0, 122, 0.2) 0%, rgba(33, 114, 229, 0.2) 100%), #FFFFFF;'};
@@ -101,21 +103,21 @@ export default function ClaimModal() {
             <CardSection gap="md">
               <RowBetween>
                 <ThemedText.DeprecatedWhite fontWeight={500}>
-                  <Trans>Claim UNI</Trans>
+                  <Trans>Claim 7evn</Trans>
                 </ThemedText.DeprecatedWhite>
                 <CloseIcon onClick={toggleClaimModal} style={{ zIndex: 99 }} color="white" />
               </RowBetween>
               <ThemedText.DeprecatedWhite fontWeight={700} fontSize={36}>
-                <Trans>{unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} UNI</Trans>
+                <Trans>{unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} 7evn</Trans>
               </ThemedText.DeprecatedWhite>
             </CardSection>
             <Break />
             <CardSection gap="sm">
               {userClaimData?.flags?.isSOCKS && (
                 <RowBetween>
-                  <ThemedText.DeprecatedSubHeader color="white">SOCKS</ThemedText.DeprecatedSubHeader>
+                  <ThemedText.DeprecatedSubHeader color="white">⑦ Loyalty Points</ThemedText.DeprecatedSubHeader>
                   <ThemedText.DeprecatedSubHeader color="white">
-                    <Trans>{SOCKS_AMOUNT} UNI</Trans>
+                    <Trans>{SOCKS_AMOUNT} 7evn</Trans>
                   </ThemedText.DeprecatedSubHeader>
                 </RowBetween>
               )}
@@ -124,14 +126,14 @@ export default function ClaimModal() {
                 JSBI.greaterThanOrEqual(unclaimedAmount.quotient, nonLPAmount) && (
                   <RowBetween>
                     <ThemedText.DeprecatedSubHeader color="white">
-                      <Trans>Liquidity</Trans>
+                      <Trans>Gameplay (200/game + 1% score)</Trans>
                     </ThemedText.DeprecatedSubHeader>
                     <ThemedText.DeprecatedSubHeader color="white">
                       <Trans>
                         {unclaimedAmount
                           .subtract(CurrencyAmount.fromRawAmount(unclaimedAmount.currency, nonLPAmount))
                           .toFixed(0, { groupSeparator: ',' })}{' '}
-                        UNI
+                        7evn
                       </Trans>
                     </ThemedText.DeprecatedSubHeader>
                   </RowBetween>
@@ -142,7 +144,7 @@ export default function ClaimModal() {
                     <Trans>User</Trans>
                   </ThemedText.DeprecatedSubHeader>
                   <ThemedText.DeprecatedSubHeader color="white">
-                    <Trans>{USER_AMOUNT} UNI</Trans>
+                    <Trans>{USER_AMOUNT} 7evn</Trans>
                   </ThemedText.DeprecatedSubHeader>
                 </RowBetween>
               )}
@@ -151,10 +153,10 @@ export default function ClaimModal() {
           <AutoColumn gap="md" style={{ padding: '1rem', paddingTop: '0' }} justify="center">
             <ThemedText.DeprecatedSubHeader fontWeight={500}>
               <Trans>
-                As a member of the Uniswap community you may claim UNI to be used for voting and governance.
+                As a player ⑦ Games you may claim 7evn for accrued gameplay.
                 <br />
                 <br />
-                <ExternalLink href="https://uniswap.org/blog/uni">Read more about UNI</ExternalLink>
+                <ExternalLink href="https://uniswap.org/blog/uni">Read more about 7evn</ExternalLink>
               </Trans>
             </ThemedText.DeprecatedSubHeader>
             <ButtonPrimary
@@ -165,7 +167,7 @@ export default function ClaimModal() {
               mt="1rem"
               onClick={onClaim}
             >
-              <Trans>Claim UNI</Trans>
+              <Trans>Claim 7evn</Trans>
             </ButtonPrimary>
           </AutoColumn>
         </ContentWrapper>
@@ -192,7 +194,7 @@ export default function ClaimModal() {
               </ThemedText.DeprecatedLargeHeader>
               {!claimConfirmed && (
                 <Text fontSize={36} color={'#ff007a'} fontWeight={800}>
-                  <Trans>{unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} UNI</Trans>
+                  <Trans>{unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} 7evn</Trans>
                 </Text>
               )}
             </AutoColumn>
@@ -203,7 +205,7 @@ export default function ClaimModal() {
                     <span role="img" aria-label="party-hat">
                       🎉{' '}
                     </span>
-                    Welcome to team Unicorn :){' '}
+                    Welcome to ⑦ Games :){' '}
                     <span role="img" aria-label="party-hat">
                       🎉
                     </span>
